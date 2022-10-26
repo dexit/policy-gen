@@ -3,7 +3,7 @@
  * Plugin Name: Policy Gen
  * Plugin URI: https://www.oxygengraphics.co.uk
  * Description: Generates terms pages
- * Version: 1.3.8
+ * Version: 1.3.8a
  * Author: Rihards 'dExIT' Mantejs
  * Author URI: scriptin.me
  */
