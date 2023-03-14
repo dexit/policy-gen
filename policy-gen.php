@@ -3,7 +3,7 @@
  * Plugin Name: Policy Gen
  * Plugin URI: https://www.oxygengraphics.co.uk
  * Description: Generates terms pages
- * Version: 1.3.8a
+ * Version: 1.3.9
  * Author: Rihards 'dExIT' Mantejs
  * Author URI: scriptin.me
  */
@@ -926,6 +926,7 @@ function policy_func2022( $atts = array() ){
  $twitter = $company_profile_options['twitter_10']; // Twitter
  $justgive = $company_profile_options['justgive_11']; // JustGive
  $youtube = $company_profile_options['youtube_12']; // Youtube
+  $pinterest = $company_profile_options['pinterest_13']; // Youtube
 		// set up default parameters
     extract(shortcode_atts(array(
      'data' => 'none'
@@ -963,6 +964,9 @@ function policy_func2022( $atts = array() ){
 		return $justgive;
 	}elseif($resultSwitch == 'youtube'){
 		return $youtube;
+	}elseif($resultSwitch == 'pinterest'){
+		return $pinterest;
+	
 	}else {
 		return 'Please provide a data="dataname". ';
 	}
