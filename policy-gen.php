@@ -252,6 +252,18 @@ class CompanyProfile {
 			 	'tip'          => esc_attr__( 'Youtube link goes here.', 'oxy_policy_gen' ) 
             )
 		);
+		add_settings_field(
+			'youtube_13', // id
+			'Pinterest', // title
+			array( $this, 'youtube_13_callback' ), // callback
+			'company-profile-admin', // page
+			'company_profile_setting_section', // section
+			array( 
+				'label_for' => 'pinterest',
+				'class' => 'pinterest',
+			 	'tip'          => esc_attr__( 'Pinterest link goes here.', 'oxy_policy_gen' ) 
+            )
+		);
 	}
 
 	public function company_profile_sanitize($input) {
@@ -312,6 +324,9 @@ class CompanyProfile {
 		}
 		if ( isset( $input['youtube_12'] ) ) {
 			$sanitary_values['youtube_12'] = sanitize_text_field( $input['youtube_12'] );
+		}
+		if ( isset( $input['pinterest_13'] ) ) {
+			$sanitary_values['pinterest_13'] = sanitize_text_field( $input['pinterest_13'] );
 		}
 
 		return $sanitary_values;
@@ -446,6 +461,14 @@ class CompanyProfile {
 			<br>
 			<p><b>Shortcode:</b> <pre> [oxy_company data="youtube"] </pre></p>',
 			isset( $this->company_profile_options['youtube_12'] ) ? esc_attr( $this->company_profile_options['youtube_12']) : ''
+		);
+	}
+			public function pinterest_13_callback() {
+		printf(
+			'<input class="regular-text" type="text" name="company_profile_option_name[pinterest_13]" id="pinterest_13" value="%s">
+			<br>
+			<p><b>Shortcode:</b> <pre> [oxy_company data="pinterest"] </pre></p>',
+			isset( $this->company_profile_options['pinterest_13'] ) ? esc_attr( $this->company_profile_options['pinterest_13']) : ''
 		);
 	}
 
