@@ -610,6 +610,43 @@ if ( is_admin() ) {
         add_action( 'init', 'contactus_menu_config' );
         
 }
+ if ( ! function_exists( 'other_core_page_config' ) ) {
+	  function other_core_page_config() {
+// Product Title
+$post_titles = array('Homepage','About Us','Blog','Services','Contact Us');
+	 foreach($post_titles as $post_title){
+		// Add Product
+		$new_post = array(
+			'post_title' => $post_title,
+			'post_slug' => strtolower($post_title),
+			'post_type' => 'page',
+			'post_staus' => 'publish', 
+			'post_author' => 1,
+			'post_template' => 'elementor_header_footer',
+			'post_content' => 'The Lorem of the Ipsum',
+			'post_excerpt' => $post_title.' Page'
+		);
+
+		// Catch post ID
+		if(post_exists( $post_title ) > 0){
+			// post already exists quitting
+		}else{
+			$post_ide = wp_insert_post( $new_post );
+			if($post_ide) {
+				$updated_post = array(
+					'ID'            =>      $post_ide,
+					'post_status'   =>      'publish', // Now it's public
+				);
+				wp_update_post($updated_post);
+				}
+		}
+	}
+
+        }
+	 require_once ABSPATH . '/wp-admin/includes/post.php';
+        add_action( 'init', 'other_core_page_config' );
+        
+}
  if ( ! function_exists( 'legal_page_config' ) ) {
 	  function legal_page_config() {
 // Product Title
