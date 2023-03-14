@@ -521,6 +521,39 @@ if ( is_admin() ) {
 
         }
         add_action( 'init', 'legal_menu_config' );
+		 function mainmenu_config() {
+			// Check if the menu exists
+			$menu_name1   = 'MainMenu';
+			$menu_exists1 = wp_get_nav_menu_object( $menu_name1 );
+
+			// If it doesn't exist, let's create it.
+			if ( ! $menu_exists1 ) {
+				$menu_id = wp_create_nav_menu($menu_name1);
+
+				// Set up default menu items
+				//  
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'  =>  __( 'Home', 'oxylegal' ),
+					'menu-item-url'    => "/", 
+					'menu-item-status' => 'publish'
+				) );
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'   =>  __( 'About Us', 'oxylegal' ),
+					'menu-item-classes' => 'about-us',
+					'menu-item-url'     => '/about-us/', 
+					'menu-item-status'  => 'publish'
+				) );
+
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'  =>  __( 'Contact Us', 'oxylegal' ),
+					'menu-item-classes' => 'contact-us',
+					'menu-item-url'    => '/contact-us/', 
+					'menu-item-status' => 'publish'
+				) );
+			}
+
+        }
+        add_action( 'init', 'legal_menu_config' );
         
 }
  if ( ! function_exists( 'legal_page_config' ) ) {
