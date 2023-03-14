@@ -492,6 +492,8 @@ class CompanyProfile {
  * $instagram_9 = $company_profile_options['instagram_9']; // Instagram
  * $twitter_10 = $company_profile_options['twitter_10']; // Twitter
  * $justgive_11 = $company_profile_options['justgive_11']; // JustGive
+ * $youtube_12 = $company_profile_options['youtube_12']; // Youtube
+ * $pinterest_13 = $company_profile_options['pinterest_13']; // Pinterest
  * 
  * * Shortcode access
  * [oxy_company data="name"]	
@@ -508,6 +510,8 @@ class CompanyProfile {
  * [oxy_company data="instagram"]
  * [oxy_company data="justgive"]
  * [oxy_company data="youtube"]
+ * [oxy_company data="pinterest"]
+ * 
  */
 
 if ( is_admin() ) {
