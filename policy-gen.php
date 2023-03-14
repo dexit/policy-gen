@@ -3,13 +3,11 @@
  * Plugin Name: Policy Gen
  * Plugin URI: https://www.oxygengraphics.co.uk
  * Description: Generates terms pages
- * Version: 1.3.8a
+ * Version: 1.3.9
  * Author: Rihards 'dExIT' Mantejs
  * Author URI: scriptin.me
  */
 /**
- * 1.3.8 - added youtube field
-* 1.3.7 - fixed buggy datepicker
 * 
 *
 *
