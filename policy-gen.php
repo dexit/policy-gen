@@ -252,6 +252,18 @@ class CompanyProfile {
 			 	'tip'          => esc_attr__( 'Youtube link goes here.', 'oxy_policy_gen' ) 
             )
 		);
+		add_settings_field(
+			'youtube_13', // id
+			'Pinterest', // title
+			array( $this, 'youtube_13_callback' ), // callback
+			'company-profile-admin', // page
+			'company_profile_setting_section', // section
+			array( 
+				'label_for' => 'pinterest',
+				'class' => 'pinterest',
+			 	'tip'          => esc_attr__( 'Pinterest link goes here.', 'oxy_policy_gen' ) 
+            )
+		);
 	}
 
 	public function company_profile_sanitize($input) {
@@ -312,6 +324,9 @@ class CompanyProfile {
 		}
 		if ( isset( $input['youtube_12'] ) ) {
 			$sanitary_values['youtube_12'] = sanitize_text_field( $input['youtube_12'] );
+		}
+		if ( isset( $input['pinterest_13'] ) ) {
+			$sanitary_values['pinterest_13'] = sanitize_text_field( $input['pinterest_13'] );
 		}
 
 		return $sanitary_values;
@@ -448,10 +463,18 @@ class CompanyProfile {
 			isset( $this->company_profile_options['youtube_12'] ) ? esc_attr( $this->company_profile_options['youtube_12']) : ''
 		);
 	}
+			public function pinterest_13_callback() {
+		printf(
+			'<input class="regular-text" type="text" name="company_profile_option_name[pinterest_13]" id="pinterest_13" value="%s">
+			<br>
+			<p><b>Shortcode:</b> <pre> [oxy_company data="pinterest"] </pre></p>',
+			isset( $this->company_profile_options['pinterest_13'] ) ? esc_attr( $this->company_profile_options['pinterest_13']) : ''
+		);
+	}
 
 }
 	$company_profile = new CompanyProfile();
-if ( is_admin() )
+//if ( is_admin() )
 
 /* 
  * Retrieve this value with:
@@ -469,6 +492,8 @@ if ( is_admin() )
  * $instagram_9 = $company_profile_options['instagram_9']; // Instagram
  * $twitter_10 = $company_profile_options['twitter_10']; // Twitter
  * $justgive_11 = $company_profile_options['justgive_11']; // JustGive
+ * $youtube_12 = $company_profile_options['youtube_12']; // Youtube
+ * $pinterest_13 = $company_profile_options['pinterest_13']; // Pinterest
  * 
  * * Shortcode access
  * [oxy_company data="name"]	
@@ -485,6 +510,8 @@ if ( is_admin() )
  * [oxy_company data="instagram"]
  * [oxy_company data="justgive"]
  * [oxy_company data="youtube"]
+ * [oxy_company data="pinterest"]
+ * 
  */
 
 if ( is_admin() ) {
@@ -521,6 +548,130 @@ if ( is_admin() ) {
 
         }
         add_action( 'init', 'legal_menu_config' );
+		 function mainmenu_config() {
+			// Check if the menu exists
+			$menu_name1   = 'MainMenu';
+			$menu_exists1 = wp_get_nav_menu_object( $menu_name1 );
+
+			// If it doesn't exist, let's create it.
+			if ( ! $menu_exists1 ) {
+				$menu_id = wp_create_nav_menu($menu_name1);
+				$locations = array(
+					$menu_name1 => __( 'The Main Menu For the Theme', 'oxy_config' ),
+				);
+				register_nav_menus( $locations );
+				// Set up default menu items
+				//  
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'  =>  __( 'Home', 'oxylegal' ),
+					'menu-item-url'    => "/", 
+					'menu-item-status' => 'publish'
+				) );
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'   =>  __( 'About Us', 'oxylegal' ),
+					'menu-item-classes' => 'about-us',
+					'menu-item-url'     => '/about-us/', 
+					'menu-item-status'  => 'publish'
+				) );
+
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'   =>  __( 'Services', 'oxylegal' ),
+					'menu-item-classes' => 'services',
+					'menu-item-url'     => '/services/', 
+					'menu-item-status'  => 'publish'
+				) );
+
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'   =>  __( 'Blog', 'oxylegal' ),
+					'menu-item-classes' => 'blog',
+					'menu-item-url'     => '/blog/', 
+					'menu-item-status'  => 'publish'
+				) );
+
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'  =>  __( 'Contact Us', 'oxylegal' ),
+					'menu-item-classes' => 'contact-us',
+					'menu-item-url'    => '/contact-us/', 
+					'menu-item-status' => 'publish'
+				) );
+			}
+
+        }
+        add_action( 'init', 'mainmenu_config' );
+		 function contactus_menu_config() {
+			// Check if the menu exists
+			$menu_name1   = 'ContactUsMenu';
+			$menu_exists1 = wp_get_nav_menu_object( $menu_name1 );
+
+			// If it doesn't exist, let's create it.
+			if ( ! $menu_exists1 ) {
+				$menu_id = wp_create_nav_menu($menu_name1);
+				$locations = array(
+					$menu_name1 => __( 'The Menu for Contact Us meant for the Footer', 'oxy_config' ),
+				);
+				register_nav_menus( $locations );
+				// Set up default menu items
+				//  
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'  =>  __( 'Call Us', 'oxylegal' ),
+					'menu-item-url'    => "tel:", 
+					'menu-item-status' => 'publish'
+				) );
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'   =>  __( 'Email Us', 'oxylegal' ),
+					'menu-item-classes' => '',
+					'menu-item-url'     => 'mailto:', 
+					'menu-item-status'  => 'publish'
+				) );
+
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'   =>  __( 'Company Address Goes Here', 'oxylegal' ),
+					'menu-item-classes' => 'services',
+					'menu-item-url'     => '#', 
+					'menu-item-status'  => 'publish'
+				) );
+				
+			}
+
+        }
+        add_action( 'init', 'contactus_menu_config' );
+        
+}
+ if ( ! function_exists( 'other_core_page_config' ) ) {
+	  function other_core_page_config() {
+// Product Title
+$post_titles = array('Homepage','About Us','Blog','Services','Contact Us');
+	 foreach($post_titles as $post_title){
+		// Add Product
+		$new_post = array(
+			'post_title' => $post_title,
+			'post_slug' => strtolower($post_title),
+			'post_type' => 'page',
+			'post_staus' => 'publish', 
+			'post_author' => 1,
+			'post_template' => 'elementor_header_footer',
+			'post_content' => 'The Lorem of the Ipsum',
+			'post_excerpt' => $post_title.' Page'
+		);
+
+		// Catch post ID
+		if(post_exists( $post_title ) > 0){
+			// post already exists quitting
+		}else{
+			$post_ide = wp_insert_post( $new_post );
+			if($post_ide) {
+				$updated_post = array(
+					'ID'            =>      $post_ide,
+					'post_status'   =>      'publish', // Now it's public
+				);
+				wp_update_post($updated_post);
+				}
+		}
+	}
+
+        }
+	 require_once ABSPATH . '/wp-admin/includes/post.php';
+        add_action( 'init', 'other_core_page_config' );
         
 }
  if ( ! function_exists( 'legal_page_config' ) ) {
