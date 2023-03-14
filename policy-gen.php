@@ -451,7 +451,7 @@ class CompanyProfile {
 
 }
 	$company_profile = new CompanyProfile();
-if ( is_admin() )
+//if ( is_admin() )
 
 /* 
  * Retrieve this value with:
@@ -541,6 +541,20 @@ if ( is_admin() ) {
 					'menu-item-title'   =>  __( 'About Us', 'oxylegal' ),
 					'menu-item-classes' => 'about-us',
 					'menu-item-url'     => '/about-us/', 
+					'menu-item-status'  => 'publish'
+				) );
+
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'   =>  __( 'Services', 'oxylegal' ),
+					'menu-item-classes' => 'services',
+					'menu-item-url'     => '/services/', 
+					'menu-item-status'  => 'publish'
+				) );
+
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'   =>  __( 'Blog', 'oxylegal' ),
+					'menu-item-classes' => 'blog',
+					'menu-item-url'     => '/blog/', 
 					'menu-item-status'  => 'publish'
 				) );
 
