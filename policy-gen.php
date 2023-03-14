@@ -8,8 +8,6 @@
  * Author URI: scriptin.me
  */
 /**
- * 1.3.8 - added youtube field
-* 1.3.7 - fixed buggy datepicker
 * 
 *
 *
