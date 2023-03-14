@@ -529,7 +529,10 @@ if ( is_admin() ) {
 			// If it doesn't exist, let's create it.
 			if ( ! $menu_exists1 ) {
 				$menu_id = wp_create_nav_menu($menu_name1);
-
+				$locations = array(
+					$menu_name1 => __( 'The Main Menu For the Theme', 'oxy_config' ),
+				);
+				register_nav_menus( $locations );
 				// Set up default menu items
 				//  
 				wp_update_nav_menu_item( $menu_id, 0, array(
@@ -567,7 +570,44 @@ if ( is_admin() ) {
 			}
 
         }
-        add_action( 'init', 'legal_menu_config' );
+        add_action( 'init', 'mainmenu_config' );
+		 function contactus_menu_config() {
+			// Check if the menu exists
+			$menu_name1   = 'ContactUsMenu';
+			$menu_exists1 = wp_get_nav_menu_object( $menu_name1 );
+
+			// If it doesn't exist, let's create it.
+			if ( ! $menu_exists1 ) {
+				$menu_id = wp_create_nav_menu($menu_name1);
+				$locations = array(
+					$menu_name1 => __( 'The Menu for Contact Us meant for the Footer', 'oxy_config' ),
+				);
+				register_nav_menus( $locations );
+				// Set up default menu items
+				//  
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'  =>  __( 'Call Us', 'oxylegal' ),
+					'menu-item-url'    => "tel:", 
+					'menu-item-status' => 'publish'
+				) );
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'   =>  __( 'Email Us', 'oxylegal' ),
+					'menu-item-classes' => '',
+					'menu-item-url'     => 'mailto:', 
+					'menu-item-status'  => 'publish'
+				) );
+
+				wp_update_nav_menu_item( $menu_id, 0, array(
+					'menu-item-title'   =>  __( 'Company Address Goes Here', 'oxylegal' ),
+					'menu-item-classes' => 'services',
+					'menu-item-url'     => '#', 
+					'menu-item-status'  => 'publish'
+				) );
+				
+			}
+
+        }
+        add_action( 'init', 'contactus_menu_config' );
         
 }
  if ( ! function_exists( 'legal_page_config' ) ) {
