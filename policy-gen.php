@@ -251,9 +251,9 @@ class CompanyProfile {
             )
 		);
 		add_settings_field(
-			'youtube_13', // id
+			'pinterest_13', // id
 			'Pinterest', // title
-			array( $this, 'youtube_13_callback' ), // callback
+			array( $this, 'pinterest_13_callback' ), // callback
 			'company-profile-admin', // page
 			'company_profile_setting_section', // section
 			array( 
